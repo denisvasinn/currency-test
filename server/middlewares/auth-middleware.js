@@ -5,29 +5,32 @@ const router = express.Router();
 function responseWithUser (user) {
     return {
         err: null,
-        user: {
+        auth: {
+            id: user._id,
             username: user.username
         }
     }
 }
 
 router.post('/signin', (req, res, next) => {
-    if (req.session.user) {
+    console.log(req.body);
+    if (req.session.auth) {
         res.status(200).json(responseWithUser(req.session.user));
     }
+
     authProvider.signIn(req.body)
         .then((user) => {
-            req.session.user = user;
+            req.session.auth = user;
             res.status(200).json(responseWithUser(user));
         })
         .catch(next);
 });
 
 router.post('/signup', (req, res, next) => {
-    console.log('\n\n\n', req.body)
+    console.log(req.body);
     authProvider.signUp(req.body)
         .then((user) => {
-            req.session.user = user;
+            req.session.auth = user;
             res.status(200).json(responseWithUser(user));
         })
         .catch(next);
