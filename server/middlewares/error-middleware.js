@@ -11,12 +11,11 @@ function errorMiddleware (err, req, res, next) {
                 <title>Error</title>
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0" />
-                <link rel="stylesheet" href="clint/index-page.css" />
             </head>
             <body>
                 <h1>${err.code} ${err.message}</h1>
-                <p>${err.stack}</p>
-            </body> 
+                <p>${err.stack || ''}</p>
+            </body>
         </html>
     `);
 }

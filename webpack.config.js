@@ -15,6 +15,12 @@ module.exports = {
         React: 'react',
         ReactDom: 'react-dom'
     },
+    resolve: {
+      alias: {
+        components: path.resolve(__dirname, 'src/components'),
+      },
+      extensions: ['.js', '.jsx'],
+   },
     module: {
         rules: [
             {

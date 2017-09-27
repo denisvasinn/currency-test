@@ -1,10 +1,5 @@
+//TODO cache
 const mongoose = require('mongoose');
-const config = require('../../config').mongo;
-mongoose.Promise = global.Promise;
-
-mongoose.connect(`mongodb://${config.dbuser}:${config.dbpassword}@ds143734.mlab.com:43734/currency-test-db`, {useMongoClient: true})
-    .then(() => console.log('Succesfully connected to MongDB'))
-    .catch(() => console.error('MongoDB connection error'));
 
 const countrySchema = mongoose.Schema({
     alpha2: {type: String, required: true},
