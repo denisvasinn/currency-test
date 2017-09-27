@@ -24,7 +24,7 @@ async function getCountry (id) {
                 const deal = {
                     from: countryCurrencies[i]._id,
                     to: currencies[j]._id,
-                    abbreviation: `${countryCurrencies[i].code} => ${currencies[j].code}}`,
+                    abbreviation: `${countryCurrencies[i].code} => ${currencies[j].code}`,
                     commission: DEFAULT_COMMISSION,
                     foreignExchange: countryCurrencies[i].exchange - currencies[j].exchange
                 };

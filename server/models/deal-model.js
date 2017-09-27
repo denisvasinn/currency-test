@@ -22,7 +22,7 @@ dealSchema.statics.saveDeal = function (data) {
     return deal.save();
 }
 
-dealSchema.statics.findOneOrUpdate = function (query, doc) {
+dealSchema.statics.findOneOrCreate = function (query, doc) {
     const options = {
         new: true,
         upsert: true

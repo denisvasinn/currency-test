@@ -17,6 +17,8 @@ const indexPageMiddleware = require('./middlewares/index-page-middleware');
 const authMiddleware = require('./middlewares/auth-middleware');
 const countryMiddleware = require('./middlewares/country-middleware');
 const dealMiddleware = require('./middlewares/deal-middleware');
+const apiMiddleware = require('./middlewares/api-middleware');
+const protectedMiddleware = require('./middlewares/protected-middleware');
 const errorMiddleware = require('./middlewares/error-middleware');
 const config = require('../config');
 
@@ -44,7 +46,7 @@ limiter({
 app
     .set('env', process.env.NODE_ENV)
     .set('port', process.env.PORT || config.port)
-    //.use(helmet())
+    .use(helmet())
     .use(compression())
     .use(express.static(path.join(__dirname, '../build')))
     .use(bodyParser.urlencoded({extended: false}))
@@ -60,14 +62,15 @@ app
             httpOnly: true,
             domain: 'localhost',
             path: '/',
-            expires: 2 * 60 * 1000
+            expires: 2 * 60 * 60 * 1000
         }
     }))
     .use('/test', testMiddleware)
     .get('/', indexPageMiddleware)
     .use('/auth', authMiddleware)
-    .use('/countries', countryMiddleware)
-    .use('/deals', dealMiddleware)
+    .use('/countries', protectedMiddleware, countryMiddleware)
+    .use('/deals', protectedMiddleware, dealMiddleware)
+    .use('/api', apiMiddleware)
     .use(errorMiddleware);
 
 const options = {

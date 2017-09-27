@@ -9,13 +9,14 @@ import {
 import HomeComponent from 'components/home-component/home-component';
 import SignInComponent from 'components/sign-in-component/sign-in-component';
 import SignUpComponent from 'components/sign-up-component/sign-up-component';
-import CountryComponent from 'components/countries-component/countries-component';
+import CountriesComponent from 'components/countries-component/countries-component';
+import CountryComponent from 'components/country-component/country-component';
 
 class AppComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            auth: {}, //null
+            auth: null,
             user: {
                 username: '',
                 password: ''
@@ -94,9 +95,11 @@ class AppComponent extends Component {
                         }
                     />
                     <Route
+                        exact
                         path="/countries"
-                        render={() => <CountryComponent countries={countries} />}
+                        render={() => <CountriesComponent countries={countries} />}
                     />
+                    <Route path='/countries/:id' component={CountryComponent} />
                 </div>
             </Router>
         );

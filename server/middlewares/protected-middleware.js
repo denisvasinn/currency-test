@@ -1,6 +1,6 @@
 function protectedMiddleware (req, res, next) {
     if (!req.session.auth) {
-        res.redirect('/auth/signin');
+        next({code: 401, message: 'Unauthorized'})
     }
     next();
 }

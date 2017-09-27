@@ -12,8 +12,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     countryProvider.getCountry(req.params.id)
-        .then((countries) => {
-            res.status(200).json(countries);
+        .then((data) => {
+            res.status(200).json(data);
         })
         .catch(next)
 })
